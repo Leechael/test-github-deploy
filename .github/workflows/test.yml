@@ -1,0 +1,20 @@
+name: deploy test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun install -g phala
+      - run: phala auth login ${{ secrets.PHALA_CLOUD_API_KEY }}
+      - run: |
+          cd $GITHUB_WORKSPACE
+          ls
+          phala cvms create --name vrf-app --compose ./docker-compose.yml --vcpu 2 --memory 2048 --disk-size 5 --skip-env
