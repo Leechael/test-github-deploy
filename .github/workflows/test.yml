@@ -18,6 +18,7 @@ jobs:
         with:
           phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
           cvm-name: 'my-app'
+          app-id: ${{ vars.SAVED_APP_ID }}
       
       # Store the app-id for future updates
       - name: Save App ID
@@ -31,12 +32,3 @@ jobs:
               name: 'SAVED_APP_ID',
               value: '${{ steps.deploy.outputs.app-id }}'
             })
-      
-      # Update existing CVM if app-id is available
-      - name: Update CVM
-        if: steps.deploy.outputs.deployment-status == 'success' && steps.deploy.outputs.app-id != ''
-        uses: Leechael/phala-deploy-action@v2
-        with:
-          phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
-          app-id: ${{ steps.deploy.outputs.app-id }}
-          compose-file: './docker-compose.yml'
