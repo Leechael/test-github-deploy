@@ -11,12 +11,7 @@ jobs:
     environment: test
     steps:
       - uses: actions/checkout@v3
-      - uses: oven-sh/setup-bun@v1
+      - name: Deploy to Phala Cloud
+        uses: Leechael/phala-deploy-action@v1
         with:
-          bun-version: latest
-      - run: |
-          set -e
-          cd $GITHUB_WORKSPACE
-          bun install -g phala
-          phala auth login "${{ secrets.PHALA_CLOUD_API_KEY }}"
-          phala cvms create --name vrf-app --compose ./docker-compose.yml --vcpu 2 --memory 2048 --disk-size 5 --skip-env
+          phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
