@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy to Phala Cloud
-        uses: Leechael/phala-deploy-action@b6bcce6a26203fcc2fa715a49c09080e46a98927
+        uses: Leechael/phala-deploy-action@v2
         with:
           phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
