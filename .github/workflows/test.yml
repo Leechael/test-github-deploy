@@ -15,6 +15,7 @@ jobs:
       - run: bun install -g phala
       - run: phala auth login ${{ secrets.PHALA_CLOUD_API_KEY }}
       - run: |
+          set -e
           cd $GITHUB_WORKSPACE
           ls
           phala cvms create --name vrf-app --compose ./docker-compose.yml --vcpu 2 --memory 2048 --disk-size 5 --skip-env
