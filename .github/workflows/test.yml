@@ -11,24 +11,7 @@ jobs:
     environment: test
     steps:
       - uses: actions/checkout@v3
-      
       - name: Deploy to Phala Cloud
-        id: deploy
         uses: Leechael/phala-deploy-action@v2
         with:
           phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
-          cvm-name: 'my-app'
-          app-id: ${{ vars.SAVED_APP_ID }}
-      
-      # Store the app-id for future updates
-      - name: Save App ID
-        if: steps.deploy.outputs.deployment-status == 'success' && steps.deploy.outputs.app-id != ''
-        uses: actions/github-script@v6
-        with:
-          script: |
-            await github.rest.actions.createOrUpdateRepoVariable({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              name: 'SAVED_APP_ID',
-              value: '${{ steps.deploy.outputs.app-id }}'
-            })
