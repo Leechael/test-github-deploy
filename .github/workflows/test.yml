@@ -1,4 +1,4 @@
-name: deploy test with debug
+name: deploy test with error capture
 
 on:
   push:
