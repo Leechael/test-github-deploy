@@ -1,4 +1,4 @@
-name: test upgrade with debug
+name: test with NODE_DEBUG
 
 on:
   push:
