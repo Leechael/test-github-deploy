@@ -1,4 +1,4 @@
-name: test without envs
+name: test with envs but skip-env
 
 on:
   push:
@@ -16,3 +16,6 @@ jobs:
         with:
           phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
           app-id: 77827dda2e3e21fad5de8f17a87e3fc494b34c0e
+          envs: |
+            FOO: BAR
+            BAR: BAZ
