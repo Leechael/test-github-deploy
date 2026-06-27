@@ -1,2 +1,2 @@
-name = "test-deploy"
+name = "tf-cross-ed0d740f"
 compose_file = "docker-compose.yml"
