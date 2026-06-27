@@ -1,0 +1,2 @@
+name = "test-deploy"
+compose_file = "docker-compose.yml"

@@ -1,20 +1,34 @@
-name: test with NODE_DEBUG
+name: Test Phala Deploy Action
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
       - name: Deploy to Phala Cloud
-        uses: Leechael/phala-deploy-action@5356143af127afc763614b85d95bd2f44c6f1912
+        id: deploy
+        uses: Leechael/phala-deploy-action@main
         with:
-          phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
+          api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
           envs: |
-            FOO: BAR
-            BAR: BAZ
+            FOO=BAR
+            BAR=BAZ
+
+      - name: Show outputs
+        if: always()
+        run: |
+          echo "Status: ${{ steps.deploy.outputs.status }}"
+          echo "App ID: ${{ steps.deploy.outputs.app-id }}"
+          echo "VM UUID: ${{ steps.deploy.outputs.vm-uuid }}"
+          echo "CVM Name: ${{ steps.deploy.outputs.cvm-name }}"
+          echo "Dashboard: ${{ steps.deploy.outputs.dashboard-url }}"
+          echo "Compose Hash: ${{ steps.deploy.outputs.compose-hash }}"
+          echo "OS Image: ${{ steps.deploy.outputs.os-image }}"
+          echo "OS Version: ${{ steps.deploy.outputs.os-image-version }}"
+          echo "KMS Type: ${{ steps.deploy.outputs.kms-type }}"
+          echo "Device ID: ${{ steps.deploy.outputs.device-id }}"
