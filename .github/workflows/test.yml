@@ -2,11 +2,13 @@ name: Test Phala Deploy Action
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: test
     steps:
       - uses: actions/checkout@v4
 
@@ -15,9 +17,6 @@ jobs:
         uses: Leechael/phala-deploy-action@main
         with:
           api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
-          envs: |
-            FOO=BAR
-            BAR=BAZ
 
       - name: Show outputs
         if: always()
