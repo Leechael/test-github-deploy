@@ -15,9 +15,9 @@ jobs:
 
       - name: Deploy to Phala Cloud
         id: deploy
-        uses: Leechael/phala-deploy-action@main
+        uses: Leechael/phala-deploy-action@feat/oidc-cli-bearer-compat
         with:
-          api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
+          workspace: leechael
 
       - name: Show outputs
         if: always()
