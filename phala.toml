@@ -1,2 +1,2 @@
-name = "tf-cross-ed0d740f"
+app_id = "c4e215f7764d180aecc8b54257ac702ffb1bf181"
 compose_file = "docker-compose.yml"
